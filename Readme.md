@@ -6,9 +6,9 @@ O bot ainda tá em desenvolvimento, e os comentários e variáveis serão todos 
 
 O bot usa o Discord.js até agora em tudo, e os comandos serão separados em uma pasta /cmd.
 
-## Running the tests
+## Alías
 
-socorro
+Toda ajuda é bem vinda, eu sou um total brainlet ainda com isso, mas juro que vou aprender e melhorar
 
 ## Built With
 
