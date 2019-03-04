@@ -39,17 +39,28 @@ client.on('message', (receivedMessage) => {
     if (receivedMessage.content.startsWith(config.prefix) && !receivedMessage.author.bot) {
     	// START WITH MY PREFIX ---AND--- NOT BE A BOT (AFTER ALL WE ONLY WANT TO RESPOND USERS)
         processCommand(receivedMessage)
-        // ALL RIGHT LET'S GO THE PROCESSING NOW
+        // ALL RIGHT LET'S GO THEY PROCESSING NOW
     }
 })
 
-
+var Regexp = /[^\s"]+|"([^"]*)"/gi
 function processCommand(receivedMessage) {
 // OKAY I RECEIVED THE COMMAND, I'LL PROCESS IT
     let fullCommand = receivedMessage.content.substr(3).trim().toLowerCase() // Remove the leading exclamation mark
 	// THE FULL THING
-    let splitCommand = fullCommand.split(/ +/g) // Split the message up in to pieces for each space
-    // THE FULL THING SPLITTED
+	let splitCommand = []
+	// okay now let's split this thing up
+    do {
+        //Each call to exec returns the next regex match as an array
+        var match = Regexp.exec(fullCommand);
+        if (match != null)
+        {
+            //Index 1 in the array is the captured group if it exists
+            //Index 0 is the matched text, which we use if no captured group exists
+            splitCommand.push(match[1] ? match[1] : match[0]);
+        }
+    } while (match != null);
+    // THE FULL THING SPLITTED (also considers expressions "inside quotes")
     let primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
     // THE FIRST ONE, AKA THE COMMAND
     let arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
@@ -73,9 +84,14 @@ function processCommand(receivedMessage) {
     // COMMAND 2: MULTIPLY
     else if (primaryCommand == "multiply") {
         multiplyCommand(arguments, receivedMessage)
+    }
 
+    // COMMAND 3: SOCORRO
+    else if (primaryCommand == "socorro") {
+    	socorro(arguments, receivedMessage)
+    }
     // IF COMMAND NOT KNOWN THEN
-    } else {
+    else {
         receivedMessage.channel.send("Que porra é essa aí menor, manda um `cv!help` que tu tá perdido")
     }
 }
@@ -115,6 +131,12 @@ function multiplyCommand(arguments, receivedMessage) {
     // HOW MUCH IS THE RESULT?
 }
 
+function socorro(arguments, receivedMessage) {
+	let sex = arguments[0]
+	let age = arguments[1]
+	let maconha = arguments[2]
+	receivedMessage.reply(`Salve ${receivedMessage.author.username}, tu é ${sex} e tem ${age} de idade né amigão... ${maconha}`)
+}
 
 
 // LOGIN - YOU DON'T REALLY NEED TO TOUCH THIS UNLESS IF YOU CHANGE THE CONFIG.JSON
