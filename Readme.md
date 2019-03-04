@@ -20,9 +20,9 @@ Toda ajuda é bem vinda, eu sou um total brainlet ainda com isso, mas juro que v
 
 Lista de [contribuidores] que participaram no projeto: (https://github.com/bornato/botzao/contributors)
 
-## License
+## Licença
 
-//This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## .
 
